@@ -59,29 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ========== 作品过滤 ==========
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const workCards = document.querySelectorAll('.work-card');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            // 切换 active 状态
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const filter = btn.getAttribute('data-filter');
-
-            workCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.classList.remove('hidden');
-                    card.style.animation = 'fadeInUp 0.4s ease forwards';
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
-        });
-    });
-
     // ========== 滚动入场动画 (Intersection Observer) ==========
     const observerOptions = {
         threshold: 0.1,
@@ -97,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // 为卡片和区域标题添加入场动画
-    document.querySelectorAll('.work-card, .community-card, .section-title, .section-desc').forEach(el => {
+    // 为作品项、社群卡片和区域标题添加入场动画
+    document.querySelectorAll('.work-item, .community-card, .section-title, .section-desc').forEach(el => {
         observer.observe(el);
     });
 
