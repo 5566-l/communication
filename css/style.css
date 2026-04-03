@@ -283,55 +283,113 @@ a {
     margin-right: auto;
 }
 
-/* ---------- 作品展示 - 纵向滚动大图 ---------- */
-.works-scroll {
-    display: flex;
-    flex-direction: column;
-    gap: 64px;
-}
-
-.work-item {
+/* ---------- 作品展示 - 自动轮播 ---------- */
+.carousel {
+    position: relative;
     max-width: 900px;
     margin: 0 auto;
-    width: 100%;
-}
-
-.work-image {
-    width: 100%;
     border-radius: var(--radius);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
-    background: linear-gradient(135deg, #e0e7ff, #f5f3ff);
+    box-shadow: var(--shadow-lg);
+    background: #000;
 }
 
-.work-image img {
+.carousel-track {
+    position: relative;
     width: 100%;
-    display: block;
-    transition: transform 0.4s ease;
+    aspect-ratio: 16 / 9;
 }
 
-.work-item:hover .work-image img {
-    transform: scale(1.02);
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease;
 }
 
-.work-info {
-    padding: 24px 8px 0;
+.carousel-slide.active {
+    opacity: 1;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 左右箭头 */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    border: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background var(--transition);
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.carousel-prev {
+    left: 16px;
+}
+
+.carousel-next {
+    right: 16px;
+}
+
+/* 指示点 */
+.carousel-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.45);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    padding: 0;
+}
+
+.carousel-dot.active {
+    background: #fff;
+    transform: scale(1.2);
+}
+
+/* 轮播下方文字 */
+.works-caption {
+    max-width: 700px;
+    margin: 32px auto 0;
     text-align: center;
 }
 
-.work-info h3 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: 8px;
-}
-
-.work-info p {
+.works-caption p {
     font-size: 1rem;
     color: var(--color-text-secondary);
     line-height: 1.7;
-    max-width: 650px;
-    margin: 0 auto;
 }
 
 /* ---------- 社群区域 ---------- */
@@ -536,8 +594,8 @@ a {
         font-size: 1.8rem;
     }
 
-    .works-scroll {
-        gap: 40px;
+    .works-caption {
+        margin-top: 24px;
     }
 
     .community-grid {
