@@ -43,48 +43,40 @@
         </div>
     </header>
 
-    <!-- 作品展示区 - 纵向滚动大图 -->
+    <!-- 作品展示区 - 自动轮播 -->
     <section id="works" class="section works-section">
         <div class="container">
             <h2 class="section-title">作品展示</h2>
             <p class="section-desc">这里展示了我的各类创作作品</p>
 
-            <div class="works-scroll">
-
-                <!-- 作品 1 -->
-                <div class="work-item">
-                    <div class="work-image">
+            <!-- 轮播图 -->
+            <div class="carousel">
+                <div class="carousel-track">
+                    <!-- 在这里添加你的作品图片，数量不限 -->
+                    <div class="carousel-slide active">
                         <img src="./assets/images/work-1.jpg" alt="作品一">
                     </div>
-                    <div class="work-info">
-                        <h3>作品标题一</h3>
-                        <p>在这里写上你对这个作品的介绍文字，可以描述创作背景、灵感来源等。</p>
-                    </div>
-                </div>
-
-                <!-- 作品 2 -->
-                <div class="work-item">
-                    <div class="work-image">
+                    <div class="carousel-slide">
                         <img src="./assets/images/work-2.jpg" alt="作品二">
                     </div>
-                    <div class="work-info">
-                        <h3>作品标题二</h3>
-                        <p>在这里写上你对这个作品的介绍文字，可以描述创作背景、灵感来源等。</p>
-                    </div>
-                </div>
-
-                <!-- 作品 3 -->
-                <div class="work-item">
-                    <div class="work-image">
+                    <div class="carousel-slide">
                         <img src="./assets/images/work-3.jpg" alt="作品三">
                     </div>
-                    <div class="work-info">
-                        <h3>作品标题三</h3>
-                        <p>在这里写上你对这个作品的介绍文字，可以描述创作背景、灵感来源等。</p>
-                    </div>
                 </div>
 
+                <!-- 左右箭头 -->
+                <button class="carousel-btn carousel-prev" aria-label="上一张">&#10094;</button>
+                <button class="carousel-btn carousel-next" aria-label="下一张">&#10095;</button>
+
+                <!-- 指示点 -->
+                <div class="carousel-dots"></div>
             </div>
+
+            <!-- 轮播图下方的文字说明 -->
+            <div class="works-caption">
+                <p>以上是我的部分创作作品，涵盖游戏、插画、视频等多个领域。更多作品持续更新中，欢迎关注！</p>
+            </div>
+
         </div>
     </section>
 
