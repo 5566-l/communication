@@ -59,6 +59,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ========== 作品轮播图 ==========
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dotsContainer = document.querySelector('.carousel-dots');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+    let currentSlide = 0;
+    let autoPlayTimer = null;
+
+    // 生成指示点
+    if (slides.length > 0 && dotsContainer) {
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.classList.add('carousel-dot');
+            if (i === 0) dot.classList.add('active');
+            dot.setAttribute('aria-label', `第 ${i + 1} 张`);
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    function goToSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+        currentSlide = (index + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+        goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        goToSlide(currentSlide - 1);
+    }
+
+    // 自动轮播 - 每 4 秒切换
+    function startAutoPlay() {
+        stopAutoPlay();
+        autoPlayTimer = setInterval(nextSlide, 4000);
+    }
+
+    function stopAutoPlay() {
+        if (autoPlayTimer) clearInterval(autoPlayTimer);
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); startAutoPlay(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); startAutoPlay(); });
+
+    // 鼠标悬停暂停，移开恢复
+    const carousel = document.querySelector('.carousel');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', stopAutoPlay);
+        carousel.addEventListener('mouseleave', startAutoPlay);
+        startAutoPlay();
+    }
+
     // ========== 滚动入场动画 (Intersection Observer) ==========
     const observerOptions = {
         threshold: 0.1,
@@ -75,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, observerOptions);
 
     // 为作品项、社群卡片和区域标题添加入场动画
-    document.querySelectorAll('.work-item, .community-card, .section-title, .section-desc').forEach(el => {
+    document.querySelectorAll('.carousel, .community-card, .section-title, .section-desc').forEach(el => {
         observer.observe(el);
     });
 
